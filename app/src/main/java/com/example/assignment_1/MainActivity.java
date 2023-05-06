@@ -2,7 +2,10 @@ package com.example.assignment_1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        showAlert();
+
+        final MediaPlayer sound1 =MediaPlayer.create(this,R.raw.yeah);
+        final MediaPlayer sound2 = MediaPlayer.create(this,R.raw.no);
         txtQN = findViewById(R.id.txtQN);
         txtQA = findViewById(R.id.txtQA);
         txtAlert = findViewById(R.id.txtAlert);
@@ -55,9 +62,11 @@ public class MainActivity extends AppCompatActivity {
                 if(Integer.parseInt(btn1.getText().toString()) == knowOperator(operator)){
                     txtAlert.setText("Correct");
                     Question(operator);
+                    sound1.start();
                 }else{
                     txtAlert.setText("Wrong");
                     Question(operator);
+                    sound2.start();
                 }
             }
         });
@@ -68,10 +77,12 @@ public class MainActivity extends AppCompatActivity {
                 if(Integer.parseInt(btn2.getText().toString()) == knowOperator(operator)){
                     txtAlert.setText("Correct");
                     Question(operator);
+                    sound1.start();
                 }else{
 
                     txtAlert.setText("Wrong");
                     Question(operator);
+                    sound2.start();
                 }
             }
         });
@@ -82,10 +93,12 @@ public class MainActivity extends AppCompatActivity {
                 if(Integer.parseInt(btn3.getText().toString()) == knowOperator(operator)){
                     txtAlert.setText("Correct");
                     Question(operator);
+                    sound1.start();
                 }else{
 
                     txtAlert.setText("Wrong");
                     Question(operator);
+                    sound2.start();
                 }
             }
         });
@@ -96,16 +109,33 @@ public class MainActivity extends AppCompatActivity {
                 if(Integer.parseInt(btn4.getText().toString()) == knowOperator(operator)){
                     txtAlert.setText("Correct");
                     Question(operator);
+                    sound1.start();
                 }else{
 
                     txtAlert.setText("Wrong");
                     Question(operator);
+                    sound2.start();
                 }
             }
         });
 
     }
 
+    private void showAlert() {
+        new AlertDialog.Builder(MainActivity.this)
+        .setTitle("Explain")
+        .setMessage("Think about question that the first number is apple and the second number is banana")
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                })
+                .create().show();
+    }
+
+    //helo broo
     private int knowOperator(String operator) {
         if(operator.equals("+")){
             return a+b;
@@ -126,6 +156,14 @@ public class MainActivity extends AppCompatActivity {
             answers[i] = answers[randomIndex];
             answers[randomIndex] = temp;
         }
+
+        for(int i=0;i<answers.length;i++){
+            for(int j=i+1;j<answers.length;j++){
+                if(answers[i] == answers[j]){
+                    answers[i] = answers[i]+1;
+                }
+            }
+        }
         btn1.setText(String.valueOf(answers[0]));
         btn2.setText(String.valueOf(answers[1]));
         btn3.setText(String.valueOf(answers[2]));
@@ -141,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
             txtQA.setText(a+"+"+b);
 
             for (int i = 0; i < 3; i++) {
-                answers[i] = random.nextInt(10);
+                answers[i] = random.nextInt(15);
             }
             answers[3] = a+b;
             shuffleArray();
@@ -149,6 +187,10 @@ public class MainActivity extends AppCompatActivity {
         } else if ("-".equals(operator)) {
             a = random.nextInt(10);
             b = random.nextInt(10);
+            while(a<b){
+                a = random.nextInt(10);
+                b = random.nextInt(10);
+            }
             txtQA.setText(a+"-"+b);
 
             for (int i = 0; i < 3; i++) {
@@ -158,8 +200,8 @@ public class MainActivity extends AppCompatActivity {
             shuffleArray();
 
         } else if ("*".equals(operator)) {
-            a = random.nextInt(10);
-            b = random.nextInt(10);
+            a = random.nextInt(5);
+            b = random.nextInt(5);
             txtQA.setText(a+"*"+b);
 
             for (int i = 0; i < 3; i++) {
@@ -171,10 +213,14 @@ public class MainActivity extends AppCompatActivity {
         } else if ("/".equals(operator)) {
             a = random.nextInt(10);
             b = random.nextInt(10);
+            while (a<b){
+                a = random.nextInt(10);
+                b = random.nextInt(10);
+            }
             txtQA.setText(a+"/"+b);
 
             for (int i = 0; i < 3; i++) {
-                answers[i] = random.nextInt(11);
+                answers[i] = random.nextInt(15);
             }
             answers[3] = a/b;
             shuffleArray();
