@@ -19,7 +19,6 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView txtQN;
     private TextView txtQA;
     private Button btn1;
     private Button btn2;
@@ -31,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private int b;
     int[] answers = new int[4];
 
+    DAOperation d = new DAOperation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
         final MediaPlayer sound1 =MediaPlayer.create(this,R.raw.yeah);
         final MediaPlayer sound2 = MediaPlayer.create(this,R.raw.no);
-        txtQN = findViewById(R.id.txtQN);
         txtQA = findViewById(R.id.txtQA);
         txtAlert = findViewById(R.id.txtAlert);
         btn1 = findViewById(R.id.btn1);
@@ -174,8 +173,8 @@ public class MainActivity extends AppCompatActivity {
     private void Question(String operator) {
 
         if ("+".equals(operator)) {
-            a = random.nextInt(10);
-            b = random.nextInt(10);
+            a = d.getArrayList1().get(0).getA();
+            b = d.getArrayList1().get(0).getB();
             txtQA.setText(a+"+"+b);
 
             for (int i = 0; i < 3; i++) {
@@ -183,14 +182,11 @@ public class MainActivity extends AppCompatActivity {
             }
             answers[3] = a+b;
             shuffleArray();
+            d.getArrayList1().remove(0);
 
         } else if ("-".equals(operator)) {
-            a = random.nextInt(10);
-            b = random.nextInt(10);
-            while(a<b){
-                a = random.nextInt(10);
-                b = random.nextInt(10);
-            }
+            a = d.getArrayList3().get(0).getA();
+            b = d.getArrayList3().get(0).getB();
             txtQA.setText(a+"-"+b);
 
             for (int i = 0; i < 3; i++) {
@@ -198,10 +194,11 @@ public class MainActivity extends AppCompatActivity {
             }
             answers[3] = a-b;
             shuffleArray();
+            d.getArrayList3().remove(0);
 
         } else if ("*".equals(operator)) {
-            a = random.nextInt(5);
-            b = random.nextInt(5);
+            a = d.getArrayList2().get(0).getA();
+            b = d.getArrayList2().get(0).getB();
             txtQA.setText(a+"*"+b);
 
             for (int i = 0; i < 3; i++) {
@@ -209,14 +206,11 @@ public class MainActivity extends AppCompatActivity {
             }
             answers[3] = a*b;
             shuffleArray();
+            d.getArrayList2().remove(0);
 
         } else if ("/".equals(operator)) {
-            a = random.nextInt(10);
-            b = random.nextInt(10);
-            while (a<b){
-                a = random.nextInt(10);
-                b = random.nextInt(10);
-            }
+            a = d.getArrayList4().get(0).getA();
+            b = d.getArrayList4().get(0).getB();
             txtQA.setText(a+"/"+b);
 
             for (int i = 0; i < 3; i++) {
@@ -224,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
             }
             answers[3] = a/b;
             shuffleArray();
+            d.getArrayList2().remove(0);
 
         } else {
             return;
