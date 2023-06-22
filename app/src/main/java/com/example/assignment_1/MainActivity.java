@@ -294,8 +294,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void showAlert() {
         new AlertDialog.Builder(MainActivity.this)
-        .setTitle("Explain")
-        .setMessage("Think about question that the first number is apple and the second number is banana")
+                .setTitle("Explain")
+                .setMessage("Think about question that the first number is apple and the second number is banana")
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -357,20 +357,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void Question(String operator) {
 
-            if ("Plus".equals(operator)) {
-                a = random.nextInt(50);
-                b = random.nextInt(50);
-                txtQA.setText(a+"+"+b);
+        if ("Plus".equals(operator)) {
+            a = random.nextInt(50);
+            b = random.nextInt(50);
+            txtQA.setText(a+"+"+b);
 
-                for (int i = 0; i < 3; i++) {
-                    answers[i] = random.nextInt(100);
-                }
-                answers[3] = a+b;
-                shuffleArray();
+            for (int i = 0; i < 3; i++) {
+                answers[i] = random.nextInt(100);
+            }
+            answers[3] = a+b;
+            shuffleArray();
 
-            }else if ("Minus".equals(operator)) {
-                a = random.nextInt(50);
-                b = random.nextInt(50);
+        }else if ("Minus".equals(operator)) {
+            a = random.nextInt(50);
+            b = random.nextInt(50);
             txtQA.setText(a+"-"+b);
 
             for (int i = 0; i < 3; i++) {
@@ -380,8 +380,8 @@ public class MainActivity extends AppCompatActivity {
             shuffleArray();
 
         } else if ("Multiplication".equals(operator)) {
-                a = random.nextInt(20);
-                b = random.nextInt(10);
+            a = random.nextInt(20);
+            b = random.nextInt(10);
             txtQA.setText(a+"*"+b);
 
             for (int i = 0; i < 3; i++) {
@@ -391,35 +391,35 @@ public class MainActivity extends AppCompatActivity {
             shuffleArray();
 
         } else if ("Division".equals(operator)) {
-                a = random.nextInt(20);
-                b = random.nextInt(10);
-                txtQA.setText(a + "/" + b);
+            a = random.nextInt(20);
+            b = random.nextInt(10);
+            txtQA.setText(a + "/" + b);
 
-                for (int i = 0; i < 3; i++) {
-                    answers[i] = random.nextInt(15);
-                }
-                answers[3] = a / b;
-                shuffleArray();
-
-            }else if ("Square root".equals(operator)) {
-                a = random.nextInt(20);
-                txtQA.setText("√"+a);
-
-                for (int i = 0; i < 3; i++) {
-                    answers[i] = random.nextInt(15);
-                }
-                answers[3] = (int) Math.sqrt(a);
-                shuffleArray();
-
-            } else if ("Factorial".equals(operator)) {
-                a = random.nextInt(5);
-                txtQA.setText(a+"!");
-
-                for (int i = 0; i < 3; i++) {
-                    answers[i] = random.nextInt(200);
-                }
-                answers[3] = factorial(a);
-                shuffleArray();
+            for (int i = 0; i < 3; i++) {
+                answers[i] = random.nextInt(15);
             }
+            answers[3] = a / b;
+            shuffleArray();
+
+        }else if ("Square root".equals(operator)) {
+            a = random.nextInt(20);
+            txtQA.setText("√"+a);
+
+            for (int i = 0; i < 3; i++) {
+                answers[i] = random.nextInt(15);
+            }
+            answers[3] = (int) Math.sqrt(a);
+            shuffleArray();
+
+        } else if ("Factorial".equals(operator)) {
+            a = random.nextInt(5);
+            txtQA.setText(a+"!");
+
+            for (int i = 0; i < 3; i++) {
+                answers[i] = random.nextInt(200);
+            }
+            answers[3] = factorial(a);
+            shuffleArray();
+        }
     }
 }

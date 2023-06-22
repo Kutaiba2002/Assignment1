@@ -20,7 +20,7 @@ public class MathActivity extends AppCompatActivity implements RecyclerInterface
 
     private TextView txtKidsMath;
     private RecyclerView recycler;
-    private Animation top,recycleranim;
+    private Animation top,recyclerAnim;
 
     private ArrayList<Operation> operations;
 
