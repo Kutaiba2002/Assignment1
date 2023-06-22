@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,12 +27,14 @@ public class MainActivity extends AppCompatActivity {
     private Button btn3;
     private Button btn4;
     private TextView txtAlert;
+    private TextView txtQ;
     Random random = new Random();
     private int a;
     private int b;
-    int[] answers = new int[4];
 
-    DAOperation d = new DAOperation();
+    int[] answers = new int[4];
+    private SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,25 +51,74 @@ public class MainActivity extends AppCompatActivity {
         btn2 = findViewById(R.id.btn2);
         btn3 = findViewById(R.id.btn3);
         btn4 = findViewById(R.id.btn4);
+        txtQ = findViewById(R.id.textView);
 
 
         Intent intent = getIntent();
-        String operator = intent.getStringExtra("operator");
+        String operator = intent.getStringExtra("operation");
+
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         Question(operator);
 
 
+        final int[] countCorrectAns = {0};
+        final int[] countAns = {0};
+        txtQ.setText(String.valueOf(countCorrectAns[0]));
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(Integer.parseInt(btn1.getText().toString()) == knowOperator(operator)){
+                    if (countAns[0] != 5) {
+                        countCorrectAns[0]++;
+                        countAns[0]++;
+                        txtQ.setText(String.valueOf(countAns[0]));
+
+                    }
+
+                    editor.putInt("correctAnswers", countCorrectAns[0]);
+                    editor.commit();
+
                     txtAlert.setText("Correct");
-                    Question(operator);
-                    sound1.start();
+                    if(countAns[0] != 5) {
+                        sound1.start();
+                        Question(operator);
+                    }else{
+
+
+                        int correctAnswers = sharedPreferences.getInt("correctAnswers", 0);
+                        if(correctAnswers>2) {
+
+                            Toast.makeText(MainActivity.this, "Congratulation, You Win. Number of correct answer " + correctAnswers, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else{
+                            Toast.makeText(MainActivity.this, "OPS!, You Lose. You got" + correctAnswers + " correct answers ", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+
+                    }
+
                 }else{
-                    txtAlert.setText("Wrong");
-                    Question(operator);
-                    sound2.start();
+
+                    if(countAns[0] != 5) {
+                        countAns[0]++;
+                        txtQ.setText(String.valueOf(countAns[0]));
+                        txtAlert.setText("Wrong");
+                        Question(operator);
+                        sound2.start();
+                    }else{
+
+                        int correctAnswers = sharedPreferences.getInt("correctAnswers", 0);
+                        if(correctAnswers>2) {
+
+                            Toast.makeText(MainActivity.this, "Congratulation, You Win. Number of correct answer " + correctAnswers, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else{
+                            Toast.makeText(MainActivity.this, "OPS!, You Lose. You got" + correctAnswers + " correct answers ", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
                 }
             }
         });
@@ -74,14 +127,55 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(Integer.parseInt(btn2.getText().toString()) == knowOperator(operator)){
+                    if (countAns[0] != 5) {
+                        countCorrectAns[0]++;
+                        countAns[0]++;
+                        txtQ.setText(String.valueOf(countAns[0]));
+
+                    }
+
+                    editor.putInt("correctAnswers", countCorrectAns[0]);
+                    editor.commit();
+
                     txtAlert.setText("Correct");
-                    Question(operator);
-                    sound1.start();
+                    if(countAns[0] != 5) {
+                        sound1.start();
+                        Question(operator);
+                    }else{
+
+                        int correctAnswers = sharedPreferences.getInt("correctAnswers", 0);
+                        if(correctAnswers>2) {
+
+                            Toast.makeText(MainActivity.this, "Congratulation, You Win. Number of correct answer " + correctAnswers, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else{
+                            Toast.makeText(MainActivity.this, "OPS!, You Lose. You got" + correctAnswers + " correct answers ", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+
+
                 }else{
 
-                    txtAlert.setText("Wrong");
-                    Question(operator);
-                    sound2.start();
+                    if(countAns[0] != 5) {
+                        countAns[0]++;
+                        txtAlert.setText("Wrong");
+                        txtQ.setText(String.valueOf(countAns[0]));
+                        Question(operator);
+                        sound2.start();
+                    }else{
+
+                        int correctAnswers = sharedPreferences.getInt("correctAnswers", 0);
+                        if(correctAnswers>2) {
+
+                            Toast.makeText(MainActivity.this, "Congratulation, You Win. Number of correct answer " + correctAnswers, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else{
+                            Toast.makeText(MainActivity.this, "OPS!, You Lose. You got" + correctAnswers + " correct answers ", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+
                 }
             }
         });
@@ -90,14 +184,54 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(Integer.parseInt(btn3.getText().toString()) == knowOperator(operator)){
+                    if (countAns[0] != 5) {
+                        countCorrectAns[0]++;
+                        countAns[0]++;
+                        txtQ.setText(String.valueOf(countAns[0]));
+
+                    }
+
+                    editor.putInt("correctAnswers", countCorrectAns[0]);
+                    editor.commit();
+
                     txtAlert.setText("Correct");
-                    Question(operator);
-                    sound1.start();
+                    if(countAns[0] != 5) {
+                        Question(operator);
+                        sound1.start();
+                    }else{
+
+                        int correctAnswers = sharedPreferences.getInt("correctAnswers", 0);
+                        if(correctAnswers>2) {
+
+                            Toast.makeText(MainActivity.this, "Congratulation, You Win. Number of correct answer " + correctAnswers, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else{
+                            Toast.makeText(MainActivity.this, "OPS!, You Lose. You got" + correctAnswers + " correct answers ", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+
                 }else{
 
-                    txtAlert.setText("Wrong");
-                    Question(operator);
-                    sound2.start();
+                    if(countAns[0] != 5) {
+                        countAns[0]++;
+                        txtAlert.setText("Wrong");
+                        txtQ.setText(String.valueOf(countAns[0]));
+                        Question(operator);
+                        sound2.start();
+                    }else{
+
+                        int correctAnswers = sharedPreferences.getInt("correctAnswers", 0);
+                        if(correctAnswers>2) {
+
+                            Toast.makeText(MainActivity.this, "Congratulation, You Win. Number of correct answer " + correctAnswers, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else{
+                            Toast.makeText(MainActivity.this, "OPS!, You Lose. You got" + correctAnswers + " correct answers ", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+
                 }
             }
         });
@@ -106,14 +240,52 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(Integer.parseInt(btn4.getText().toString()) == knowOperator(operator)){
+                    if (countAns[0] != 5) {
+                        countCorrectAns[0]++;
+                        countAns[0]++;
+                        txtQ.setText(String.valueOf(countAns[0]));
+                    }
+
+                    editor.putInt("correctAnswers", countCorrectAns[0]);
+                    editor.commit();
+
                     txtAlert.setText("Correct");
-                    Question(operator);
-                    sound1.start();
+                    if(countAns[0] != 5) {
+                        Question(operator);
+                        sound1.start();
+                    }else{
+                        int correctAnswers = sharedPreferences.getInt("correctAnswers", 0);
+                        if(correctAnswers>2) {
+
+                            Toast.makeText(MainActivity.this, "Congratulation, You Win. Number of correct answer " + correctAnswers, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else{
+                            Toast.makeText(MainActivity.this, "OPS!, You Lose. You got" + correctAnswers + " correct answers ", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+
                 }else{
 
-                    txtAlert.setText("Wrong");
-                    Question(operator);
-                    sound2.start();
+                    if(countAns[0] != 5) {
+                        countAns[0]++;
+                        txtAlert.setText("Wrong");
+                        txtQ.setText(String.valueOf(countAns[0]));
+                        Question(operator);
+                        sound2.start();
+                    }else{
+
+                        int correctAnswers = sharedPreferences.getInt("correctAnswers", 0);
+                        if(correctAnswers>2) {
+
+                            Toast.makeText(MainActivity.this, "Congratulation, You Win. Number of correct answer " + correctAnswers, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else{
+                            Toast.makeText(MainActivity.this, "OPS!, You Lose. You got" + correctAnswers + " correct answers ", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+
                 }
             }
         });
@@ -136,16 +308,29 @@ public class MainActivity extends AppCompatActivity {
 
     //helo broo
     private int knowOperator(String operator) {
-        if(operator.equals("+")){
+        if(operator.equals("Plus")){
             return a+b;
-        } else if (operator.equals("-")) {
+        } else if (operator.equals("Minus")) {
             return a-b;
-        } else if (operator.equals("*")) {
+        } else if (operator.equals("Multiplication")) {
             return a*b;
-        } else if (operator.equals("/")) {
+        } else if (operator.equals("Division")) {
             return a/b;
+        } else if (operator.equals("Factorial")) {
+            return factorial(a);
+        } else if (operator.equals("Square root")) {
+            Math.sqrt(a);
         }
         return 0;
+    }
+
+    private int factorial(int a) {
+        int b = 1;
+        for(int i=1;i<=a;i++){
+
+            b *= i;
+        }
+        return b;
     }
 
     private void shuffleArray() {
@@ -172,57 +357,69 @@ public class MainActivity extends AppCompatActivity {
 
     private void Question(String operator) {
 
-        if ("+".equals(operator)) {
-            a = d.getArrayList1().get(0).getA();
-            b = d.getArrayList1().get(0).getB();
-            txtQA.setText(a+"+"+b);
+            if ("Plus".equals(operator)) {
+                a = random.nextInt(50);
+                b = random.nextInt(50);
+                txtQA.setText(a+"+"+b);
 
-            for (int i = 0; i < 3; i++) {
-                answers[i] = random.nextInt(15);
-            }
-            answers[3] = a+b;
-            shuffleArray();
-            d.getArrayList1().remove(0);
+                for (int i = 0; i < 3; i++) {
+                    answers[i] = random.nextInt(100);
+                }
+                answers[3] = a+b;
+                shuffleArray();
 
-        } else if ("-".equals(operator)) {
-            a = d.getArrayList3().get(0).getA();
-            b = d.getArrayList3().get(0).getB();
+            }else if ("Minus".equals(operator)) {
+                a = random.nextInt(50);
+                b = random.nextInt(50);
             txtQA.setText(a+"-"+b);
 
             for (int i = 0; i < 3; i++) {
-                answers[i] = random.nextInt(15);
+                answers[i] = random.nextInt(100);
             }
             answers[3] = a-b;
             shuffleArray();
-            d.getArrayList3().remove(0);
 
-        } else if ("*".equals(operator)) {
-            a = d.getArrayList2().get(0).getA();
-            b = d.getArrayList2().get(0).getB();
+        } else if ("Multiplication".equals(operator)) {
+                a = random.nextInt(20);
+                b = random.nextInt(10);
             txtQA.setText(a+"*"+b);
 
             for (int i = 0; i < 3; i++) {
-                answers[i] = random.nextInt(20);
+                answers[i] = random.nextInt(200);
             }
             answers[3] = a*b;
             shuffleArray();
-            d.getArrayList2().remove(0);
 
-        } else if ("/".equals(operator)) {
-            a = d.getArrayList4().get(0).getA();
-            b = d.getArrayList4().get(0).getB();
-            txtQA.setText(a+"/"+b);
+        } else if ("Division".equals(operator)) {
+                a = random.nextInt(20);
+                b = random.nextInt(10);
+                txtQA.setText(a + "/" + b);
 
-            for (int i = 0; i < 3; i++) {
-                answers[i] = random.nextInt(15);
+                for (int i = 0; i < 3; i++) {
+                    answers[i] = random.nextInt(15);
+                }
+                answers[3] = a / b;
+                shuffleArray();
+
+            }else if ("Square root".equals(operator)) {
+                a = random.nextInt(20);
+                txtQA.setText("√"+a);
+
+                for (int i = 0; i < 3; i++) {
+                    answers[i] = random.nextInt(15);
+                }
+                answers[3] = (int) Math.sqrt(a);
+                shuffleArray();
+
+            } else if ("Factorial".equals(operator)) {
+                a = random.nextInt(5);
+                txtQA.setText(a+"!");
+
+                for (int i = 0; i < 3; i++) {
+                    answers[i] = random.nextInt(200);
+                }
+                answers[3] = factorial(a);
+                shuffleArray();
             }
-            answers[3] = a/b;
-            shuffleArray();
-            d.getArrayList2().remove(0);
-
-        } else {
-            return;
-        }
-
     }
 }

@@ -1,71 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:background="@drawable/frame1"
+    android:background="#92B5B1"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/txtQA"
-        android:layout_width="100sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="36sp"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn3" />
 
-    <LinearLayout
-        android:layout_width="300dp"
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        >
+        android:layout_margin="8dp"
+        android:text="btn1"
+        app:layout_constraintTop_toBottomOf="@id/txtQA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
-            android:id="@+id/btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp" />
-
-        <Button
-            android:id="@+id/btn2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="300dp"
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_margin="8dp"
+        android:text="btn2"
+        app:layout_constraintTop_toBottomOf="@id/btn1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        >
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="btn3"
+        app:layout_constraintTop_toBottomOf="@id/btn2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
-            android:id="@+id/btn3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp" />
-
-        <Button
-            android:id="@+id/btn4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="btn4"
+        app:layout_constraintTop_toBottomOf="@id/btn3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/txtAlert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Let's Go"
+        android:layout_marginTop="24dp"
         android:textSize="30sp"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn4" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="90dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="68dp"
+        android:gravity="center"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

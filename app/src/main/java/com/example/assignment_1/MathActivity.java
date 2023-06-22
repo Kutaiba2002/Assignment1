@@ -1,67 +1,65 @@
 package com.example.assignment_1;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
+
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-public class MathActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MathActivity extends AppCompatActivity implements RecyclerInterface {
 
     private TextView txtKidsMath;
-    private ImageView addition;
-    private ImageView subtraction;
-    private ImageView multiplication;
-    private ImageView division;
+    private RecyclerView recycler;
+    private Animation top,recycleranim;
+
+    private ArrayList<Operation> operations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_math);
 
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        top = AnimationUtils.loadAnimation(this,R.anim.top_animation);
+
         txtKidsMath = findViewById(R.id.txtKidsMath);
-        addition = findViewById(R.id.addition);
-        subtraction = findViewById(R.id.subtraction);
-        multiplication = findViewById(R.id.multiplication);
-        division = findViewById(R.id.division);
+        operations = new ArrayList<>();
+        operations.add(new Operation("Plus", R.drawable.plus));
+        operations.add(new Operation("Minus", R.drawable.minus));
+        operations.add(new Operation("Division", R.drawable.division));
+        operations.add(new Operation("Multiplication", R.drawable.multiplication));
+        operations.add(new Operation("Factorial", R.drawable.factorial));
+        operations.add(new Operation("Square root", R.drawable.square));
 
-        addition.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent symbol = new Intent(MathActivity.this, MainActivity.class);
-                symbol.putExtra("operator","+");
-                startActivity(symbol);
-            }
-        });
 
-        subtraction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent symbol = new Intent(MathActivity.this, MainActivity.class);
-                symbol.putExtra("operator","-");
-                startActivity(symbol);
-            }
-        });
+        OperationAdapter adapter = new OperationAdapter(operations, this);
 
-        multiplication.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent symbol = new Intent(MathActivity.this, MainActivity.class);
-                symbol.putExtra("operator","*");
-                startActivity(symbol);
-            }
-        });
+        recycler = findViewById(R.id.recycler);
+        recycler.setAdapter(adapter);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
 
-        division.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent symbol = new Intent(MathActivity.this, MainActivity.class);
-                symbol.putExtra("operator","/");
-                startActivity(symbol);
-            }
-        });
+        txtKidsMath.setAnimation(top);
+
     }
+
+    @Override
+    public void onItemClick(int position) {
+        Operation operation = operations.get(position);
+        Intent intent = new Intent(MathActivity.this, MainActivity.class);
+        intent.putExtra("operation", operation.getOperation());
+        startActivity(intent);
+    }
+
 }

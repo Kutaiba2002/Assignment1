@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/illustration12"
+    android:background="#979191"
     android:padding="15dp"
     tools:context=".MathActivity">
 
@@ -15,61 +15,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/unkempt_bold"
-        android:text="Kids Maths"
+        android:text="Learn Maths"
+        android:textColor="@color/white"
         android:textSize="48sp"
+        android:layout_marginBottom="30dp"
         />
 
-    <LinearLayout
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-
-
-        >
-
-        <ImageView
-            android:id="@+id/addition"
-            android:layout_width="80dp"
-            android:layout_height="60dp"
-            android:src="@drawable/plus"
-            android:layout_gravity="center"
-            android:layout_margin="30dp"
-
-            />
-
-        <ImageView
-            android:id="@+id/subtraction"
-            android:layout_width="77dp"
-            android:layout_height="70dp"
-            android:src="@drawable/minus"
-            android:layout_gravity="center"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-
-        >
-        <ImageView
-            android:id="@+id/multiplication"
-            android:layout_width="77dp"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:layout_margin="30dp"
-            android:src="@drawable/multiplication"
-            />
-
-        <ImageView
-            android:id="@+id/division"
-            android:layout_width="77dp"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:src="@drawable/division"
-            />
-    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:id="@+id/recycler"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintVertical_weight="1"
+        />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
